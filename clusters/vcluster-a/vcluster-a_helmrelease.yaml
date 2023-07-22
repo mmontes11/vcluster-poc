@@ -1,0 +1,13 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vcluster-a
+spec:
+  chart:
+    spec:
+      chart: vcluster
+      sourceRef:
+        kind: HelmRepository
+        name: loft
+      version: "0.15.2"
+  interval: 5m

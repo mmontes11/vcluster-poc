@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: vcluster-a
+resources:
+  - vcluster-a_helmrelease.yaml
+  - vcluster-a_helmrepository.yaml
+  - vcluster-a_namespace.yaml
