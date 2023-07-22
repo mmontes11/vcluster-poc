@@ -1,6 +1,5 @@
 # vcluster-poc
-Multi-tenancy using vcluster + flux PoC
-
+vcluster + flux multi-tenancy  PoC
 
 ```bash
 make cluster
