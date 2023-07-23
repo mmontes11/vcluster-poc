@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: vcluster-a
+  name: vcluster-a-nodeport
 spec:
   selector:
     app: vcluster
