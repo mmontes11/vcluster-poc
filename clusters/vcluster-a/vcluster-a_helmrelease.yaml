@@ -11,3 +11,7 @@ spec:
         name: loft
       version: "0.15.2"
   interval: 5m
+  values:
+    syncer:
+      extraArgs:
+      - --tls-san=127.0.0.1

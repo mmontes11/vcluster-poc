@@ -5,3 +5,4 @@ resources:
   - vcluster-a_helmrelease.yaml
   - vcluster-a_helmrepository.yaml
   - vcluster-a_namespace.yaml
+  - vcluster-a_service.yaml
