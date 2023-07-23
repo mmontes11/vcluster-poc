@@ -19,12 +19,11 @@ help: ## Display this help.
 
 GITHUB_USER ?= mmontes11
 GITHUB_REPO ?= vcluster-poc
-
 VCLUSTER_A ?= vcluster-a
-VCLUSTER_KUBECONFIG ?= ./kubeconfig/$(VCLUSTER_A).yaml
+VCLUSTER_KUBECONFIG ?= ./kubeconfig/vcluster-a
 
-.PHONY: poc
-poc: flux cluster-ctx ## Deploy PoC.
+.PHONY: deploy
+deploy: flux cluster-ctx ## Deploy PoC.
 	$(FLUX) bootstrap github \
 		--owner=$(GITHUB_USER) \
 		--repository=$(GITHUB_REPO) \
@@ -32,32 +31,31 @@ poc: flux cluster-ctx ## Deploy PoC.
 		--personal=true \
 		--path=clusters/host-cluster
 
-.PHONY: ctx
-ctx: vcluster cluster-ctx ## Configure vcluster contexts.
-	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A) --kubeconfig=$(VCLUSTER_KUBECONFIG) --server=https://127.0.0.1:30001
+.PHONY: vctx
+vctx: vcluster cluster-ctx ## Configure vcluster contexts.
+	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A) --server=https://127.0.0.1:30001
 
-.PHONY: ctx-a
-ctx-a: ctx ## Switch to vcluster-a context.
-	export KUBECONFIG=$(VCLUSTER_A)
-
-.PHONY: ctx-unset
-ctx-unset: cluster-ctx  ## Unset vcluster KUBECONFIG and switch back to host-cluder.
-	unset KUBECONFIG
+# TODO:
+# vcluster disconnect does not delete the vcluster current context, you have to vcluster delete if you want to do so.
+# Support vcluster disconnect --delete-current upstream to have a simetric behaviour between subcommands. 
+.PHONY: vcluster-delete
+vcluster-delete: vcluster cluster-ctx ## Delete vclusters.
+	$(VCLUSTER) delete $(VCLUSTER_A) -n $(VCLUSTER_A)
 
 ##@ Cluster
 
-CLUSTER ?= cluster-host
+CLUSTER ?= host-cluster
 
 .PHONY: cluster
-cluster: kind ## Create a single node kind cluster.
+cluster: kind ## Provision kind cluster.
 	$(KIND) create cluster --name $(CLUSTER) --config hack/kind.yaml
 
 .PHONY: cluster-delete
-cluster-delete: kind ## Delete the kind cluster.
+cluster-delete: kind ## Delete kind cluster.
 	$(KIND) delete cluster --name $(CLUSTER)
 
 .PHONY: cluster-ctx
-cluster-ctx: ## Sets cluster context.
+cluster-ctx: ## Set cluster context.
 	@kubectl config use-context kind-$(CLUSTER)
 
 ##@ Tooling
