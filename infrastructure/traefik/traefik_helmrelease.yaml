@@ -19,22 +19,27 @@ spec:
         enabled: true
     ingressRoute:
       dashboard:
-        enabled: true
+        enabled: false
     ingressClass:
-      enabled: false
+      enabled: true
+      isDefaultClass: true
     ports:
       web:
         redirectTo: websecure
     providers:
       kubernetesCRD:
         enabled: true
+        ingressClass: traefik
       kubernetesIngress:
-        enabled: false
+        enabled: true
+        ingressClass: traefik
     experimental:
       kubernetesGateway:
         enabled: true
         gateway:
           enabled: true
+    additionalArguments:
+      - "--serverstransport.insecureskipverify"
     service:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 172.18.0.200

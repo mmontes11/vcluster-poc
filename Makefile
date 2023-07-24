@@ -17,11 +17,14 @@ all: help
 help: ## Display this help.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
+TRAEFIK_IP ?= 172.18.0.200
+TRAEFIK_DNS ?= traefik.local
+.PHONY: network
+network: ## Configure network.
+	@./hack/add_host.sh $(TRAEFIK_IP) $(TRAEFIK_DNS)
+
 GITHUB_USER ?= mmontes11
 GITHUB_REPO ?= vcluster-poc
-VCLUSTER_A ?= vcluster-a
-VCLUSTER_IP ?= 172.18.0.210
-
 .PHONY: deploy
 deploy: flux cluster-ctx ## Deploy PoC.
 	$(FLUX) bootstrap github \
@@ -31,12 +34,14 @@ deploy: flux cluster-ctx ## Deploy PoC.
 		--personal=true \
 		--path=clusters/host-cluster
 
+VCLUSTER_A ?= vcluster-a
+VCLUSTER_IP ?= 172.18.0.210
 .PHONY: vctx
 vctx: vcluster cluster-ctx ## Configure vcluster contexts.
 	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A) --server=$(VCLUSTER_IP)
 
 .PHONY: install
-install: cluster deploy ## Install cluster and PoC.
+install: network cluster deploy ## Install cluster and PoC.
 
 .PHONY: uninstall
 uninstall: vcluster-delete cluster-delete ## Tear down vcluster and cluster.
