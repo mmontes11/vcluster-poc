@@ -1,0 +1,22 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tenant
+  namespace: vcluster-a
+spec:
+  dependsOn:
+    - name: vcluster-a
+      namespace: flux-system
+    - name: gateway-api
+      namespace: flux-system
+  kubeConfig:
+    secretRef:
+      name: vc-vcluster-a
+      key: config
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./tenant/tenant-a
+  prune: true

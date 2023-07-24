@@ -21,7 +21,7 @@ TRAEFIK_IP ?= 172.18.0.200
 .PHONY: network
 network: ## Configure network.
 	@./hack/add_host.sh $(TRAEFIK_IP) traefik.local
-	@./hack/add_host.sh $(TRAEFIK_IP) nginx.traefik.local
+	@./hack/add_host.sh $(TRAEFIK_IP) tenant-a.traefik.local
 
 GITHUB_USER ?= mmontes11
 GITHUB_REPO ?= vcluster-poc
