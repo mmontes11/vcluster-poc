@@ -33,13 +33,10 @@ spec:
       kubernetesIngress:
         enabled: true
         ingressClass: traefik
-    experimental:
-      kubernetesGateway:
-        enabled: true
-        gateway:
-          enabled: true
     additionalArguments:
       - "--serverstransport.insecureskipverify"
+      - "--experimental.kubernetesgateway"
+      - "--providers.kubernetesgateway"
     service:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 172.18.0.200
