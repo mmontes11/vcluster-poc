@@ -1,0 +1,56 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vcluster-b
+spec:
+  chart:
+    spec:
+      chart: vcluster
+      sourceRef:
+        kind: HelmRepository
+        name: loft
+      version: "0.15.2"
+  interval: 5m
+  values:
+    service:
+      type: LoadBalancer
+    syncer:
+      serviceAnnotations:
+        metallb.universe.tf/loadBalancerIPs: 172.18.0.211
+      extraArgs:
+      - --tls-san=172.18.0.211
+      - --out-kube-config-server=https://172.18.0.211
+    sync:
+      generic:
+        clusterRole:
+          extraRules:
+            - apiGroups:
+                - apiextensions.k8s.io
+              resources:
+                - customresourcedefinitions
+              verbs:
+                - get
+                - list
+                - watch
+        role:
+          extraRules:
+            - apiGroups:
+                - gateway.networking.k8s.io  
+              resources:
+                - httproutes 
+              verbs:
+                - create
+                - delete
+                - patch
+                - update
+                - get
+                - list
+                - watch
+        config: |-
+          version: v1beta1
+          export:
+            - apiVersion: gateway.networking.k8s.io/v1beta1
+              kind: HTTPRoute 
+              patches:
+                - op: rewriteName
+                  path: .spec.rules[*].backendRefs[*].name

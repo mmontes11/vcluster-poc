@@ -35,15 +35,12 @@ deploy: flux cluster-ctx ## Deploy PoC.
 		--path=clusters/host-cluster
 
 VCLUSTER_A ?= vcluster-a
+VCLUSTER_B ?= vcluster-b
+
 .PHONY: vctx
 vctx: vcluster cluster-ctx ## Configure vcluster contexts.
 	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A)
-
-.PHONY: install
-install: network cluster deploy ## Install cluster and PoC.
-
-.PHONY: uninstall
-uninstall: vcluster-delete cluster-delete ## Tear down vcluster and cluster.
+	$(VCLUSTER) connect $(VCLUSTER_B) -n $(VCLUSTER_B)
 
 # TODO:
 # vcluster disconnect does not delete the vcluster current context, you have to vcluster delete if you want to do so.
@@ -51,6 +48,13 @@ uninstall: vcluster-delete cluster-delete ## Tear down vcluster and cluster.
 .PHONY: vcluster-delete
 vcluster-delete: vcluster cluster-ctx ## Delete vclusters.
 	$(VCLUSTER) delete $(VCLUSTER_A) -n $(VCLUSTER_A)
+	$(VCLUSTER) delete $(VCLUSTER_B) -n $(VCLUSTER_B)
+
+.PHONY: install
+install: network cluster deploy ## Install cluster and PoC.
+
+.PHONY: uninstall
+uninstall: vcluster-delete cluster-delete ## Tear down vcluster and cluster.
 
 ##@ Cluster
 
