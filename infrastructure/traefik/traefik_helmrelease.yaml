@@ -19,7 +19,7 @@ spec:
         enabled: true
     ingressRoute:
       dashboard:
-        enabled: false
+        enabled: true
     ingressClass:
       enabled: false
     ports:
@@ -27,7 +27,7 @@ spec:
         redirectTo: websecure
     providers:
       kubernetesCRD:
-        enabled: false
+        enabled: true
       kubernetesIngress:
         enabled: false
     experimental:
