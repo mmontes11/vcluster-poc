@@ -10,10 +10,6 @@ spec:
     - "tenant-a.traefik.local"
   rules:
     - backendRefs:
-        # TODO: 
-        # This is supposed to point to the virtual service, but it doesn't get translated, it is copied as it is.
-        # Raise a PR upstream to translate Services in HTTPRoutes
         - kind: Service
-          name: nginx-x-default-x-vcluster-a 
-          namespace: vcluster-a 
+          name: nginx
           port: 80
