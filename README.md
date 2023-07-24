@@ -4,9 +4,8 @@ vcluster + flux multi-tenancy  PoC
 ### Install
 
 ```bash
-make cluster
 export GITHUB_TOKEN=<your-personal-access-token>
-make deploy
+make install
 ``` 
 
 ### Configure vcluster contexts
@@ -18,6 +17,5 @@ make vctx
 ### Uninstall
 
 ```bash
-make vcluster-delete
-make cluster-delete
+make uninstall
 ```

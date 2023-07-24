@@ -20,7 +20,7 @@ help: ## Display this help.
 GITHUB_USER ?= mmontes11
 GITHUB_REPO ?= vcluster-poc
 VCLUSTER_A ?= vcluster-a
-VCLUSTER_KUBECONFIG ?= ./kubeconfig/vcluster-a
+VCLUSTER_IP ?= 192.168.0.310
 
 .PHONY: deploy
 deploy: flux cluster-ctx ## Deploy PoC.
@@ -33,7 +33,13 @@ deploy: flux cluster-ctx ## Deploy PoC.
 
 .PHONY: vctx
 vctx: vcluster cluster-ctx ## Configure vcluster contexts.
-	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A) --server=https://127.0.0.1:30001
+	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A) --server=$(VCLUSTER_IP)
+
+.PHONY: install
+install: cluster deploy ## Install cluster and PoC.
+
+.PHONY: uninstall
+uninstall: vcluster-delete cluster-delete ## Tear down vcluster and cluster.
 
 # TODO:
 # vcluster disconnect does not delete the vcluster current context, you have to vcluster delete if you want to do so.
