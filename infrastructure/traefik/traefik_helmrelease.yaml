@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik-external
+spec:
+  chart:
+    spec:
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+      version: "23.1.0"
+  interval: 5m
+  values:
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+    ingressRoute:
+      dashboard:
+        enabled: false
+    ingressClass:
+      enabled: false
+    ports:
+      web:
+        redirectTo: websecure
+    providers:
+      kubernetesCRD:
+        enabled: false
+      kubernetesIngress:
+        enabled: false
+    experimental:
+      kubernetesGateway:
+        enabled: true
+        gateway:
+          enabled: true
+    service:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 192.168.0.300
+    deployment:
+      enabled: true
+    resources:
+      requests:
+        cpu: "300m"
+        memory: "200Mi"
+      limits:
+        memory: "200Mi"

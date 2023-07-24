@@ -45,10 +45,11 @@ vcluster-delete: vcluster cluster-ctx ## Delete vclusters.
 ##@ Cluster
 
 CLUSTER ?= host-cluster
+KIND_IMAGE ?= kindest/node:v1.27.3
 
 .PHONY: cluster
 cluster: kind ## Provision kind cluster.
-	$(KIND) create cluster --name $(CLUSTER) --config hack/kind.yaml
+	$(KIND) create cluster --name $(CLUSTER) --image $(KIND_IMAGE)
 
 .PHONY: cluster-delete
 cluster-delete: kind ## Delete kind cluster.

@@ -4,6 +4,9 @@ metadata:
   name: vcluster-a
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: metallb
+    - name: traefik
   interval: 5m
   sourceRef:
     kind: GitRepository

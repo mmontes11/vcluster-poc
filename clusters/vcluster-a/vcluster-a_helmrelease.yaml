@@ -13,5 +13,9 @@ spec:
   interval: 5m
   values:
     syncer:
+      serviceAnnotations:
+        metallb.universe.tf/loadBalancerIPs: 192.168.0.310       
       extraArgs:
       - --tls-san=127.0.0.1
+    service:
+      type: LoadBalancer
