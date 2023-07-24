@@ -19,6 +19,7 @@ spec:
         metallb.universe.tf/loadBalancerIPs: 172.18.0.210
       extraArgs:
       - --tls-san=172.18.0.210
+      - --out-kube-config-server=https://172.18.0.210
     sync:
       generic:
         clusterRole:

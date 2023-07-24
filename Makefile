@@ -35,10 +35,9 @@ deploy: flux cluster-ctx ## Deploy PoC.
 		--path=clusters/host-cluster
 
 VCLUSTER_A ?= vcluster-a
-VCLUSTER_IP ?= 172.18.0.210
 .PHONY: vctx
 vctx: vcluster cluster-ctx ## Configure vcluster contexts.
-	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A) --server=$(VCLUSTER_IP)
+	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A)
 
 .PHONY: install
 install: network cluster deploy ## Install cluster and PoC.
