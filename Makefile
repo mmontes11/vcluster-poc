@@ -20,7 +20,7 @@ help: ## Display this help.
 GITHUB_USER ?= mmontes11
 GITHUB_REPO ?= vcluster-poc
 VCLUSTER_A ?= vcluster-a
-VCLUSTER_IP ?= 192.168.0.310
+VCLUSTER_IP ?= 172.18.0.210
 
 .PHONY: deploy
 deploy: flux cluster-ctx ## Deploy PoC.

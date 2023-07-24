@@ -6,6 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: metallb
+    - name: metallb-config
     - name: traefik
   interval: 5m
   sourceRef:

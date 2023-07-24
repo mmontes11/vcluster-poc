@@ -37,6 +37,6 @@ spec:
           enabled: true
     service:
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 192.168.0.300
+        metallb.universe.tf/loadBalancerIPs: 172.18.0.200
     deployment:
       enabled: true
