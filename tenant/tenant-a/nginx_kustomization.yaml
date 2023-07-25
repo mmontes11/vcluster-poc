@@ -3,6 +3,9 @@ kind: Kustomization
 metadata:
   name: nginx
 spec:
+  dependsOn:
+    - name: gateway-api
+      namespace: flux-system
   kubeConfig:
     secretRef:
       name: vc-vcluster-a
@@ -12,6 +15,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: ./infrastructure/tenant-a/nginx
+  path: ./tenant/tenant-a/nginx
   prune: true
   timeout: 5m

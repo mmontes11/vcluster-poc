@@ -5,3 +5,4 @@ resources:
   - vcluster-b_clusterrolebinding.yaml
   - vcluster-b_helmrelease.yaml
   - vcluster-b_helmrepository.yaml
+  - vcluster-b_namespace.yaml

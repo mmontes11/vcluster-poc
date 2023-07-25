@@ -6,11 +6,6 @@ metadata:
 spec:
   dependsOn:
     - name: vcluster-a
-    - name: gateway-api
-  kubeConfig:
-    secretRef:
-      name: vc-vcluster-a
-      key: config
   interval: 5m
   sourceRef:
     kind: GitRepository
