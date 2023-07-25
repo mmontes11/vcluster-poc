@@ -7,7 +7,7 @@ spec:
     secretRef:
       name: vc-vcluster-b
       key: config
-  targetNamespace: mariadb-operator
+  targetNamespace: default
   chart:
     spec:
       chart: mariadb-operator

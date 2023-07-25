@@ -4,4 +4,3 @@ namespace: vcluster-b
 resources:
   - mariadb-operator_helmrelease.yaml
   - mariadb-operator_helmrepository.yaml
-  - mariadb-operator_namespace.yaml

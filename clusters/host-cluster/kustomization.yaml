@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - infrastructure_kustomization.yaml
+  - tenant-a_kustomization.yaml
+  - tenant-b_kustomization.yaml
+  - vcluster-a_kustomization.yaml
+  - vcluster-b_kustomization.yaml
