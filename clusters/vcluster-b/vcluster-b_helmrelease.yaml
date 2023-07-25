@@ -54,28 +54,17 @@ spec:
               patches:
                 - op: rewriteName
                   path: .spec.rules[*].backendRefs[*].name
-                - apiVersion: monitoring.coreos.com/v1
-                  kind: ServiceMonitor
-                  patches:
-                    - op: add
-                      path: .metadata.labels
-                      value:
-                        release: kube-prometheus-stack
-                    - op: copyFromObject
-                      fromPath: .metadata.labels['release'] 
-                      path: .metadata.labels['release']
-                    - op: replace
-                      path: .spec.namespaceSelector
-                      value:
-                        any: false
-                        matchNames: []
-                    - op: rewriteName
-                      path: .spec.endpoints[*]
-                    - op: rewriteLabelKey
-                      path: .spec.jobLabel
-                    - op: rewriteLabelKey
-                      path: .spec.targetLabels[*]
-                    - op: rewriteLabelKey
-                      path: .spec.podTargetLabels[*]
-                    - op: rewriteLabelExpressionsSelector
-                      path: .spec.selector
+            - apiVersion: monitoring.coreos.com/v1
+              kind: ServiceMonitor
+              patches:
+                - op: add
+                  path: .metadata.labels
+                  value:
+                    release: kube-prometheus-stack
+                - op: copyFromObject
+                  fromPath: .metadata.labels['release'] 
+                  path: .metadata.labels['release']
+                - op: rewriteName
+                  path: .spec.endpoints[*]
+                - op: rewriteLabelExpressionsSelector
+                  path: .spec.selector
