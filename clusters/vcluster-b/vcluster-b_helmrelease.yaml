@@ -64,6 +64,7 @@ spec:
                 - cert-manager.io
               resources:
                 - certificates
+                - clusterissuers
               verbs:
                 - create
                 - delete
@@ -78,32 +79,6 @@ spec:
               resources:
                 - helmreleases
                 - helmrepositories
-              verbs:
-                - create
-                - delete
-                - patch
-                - update
-                - get
-                - list
-                - watch
-            - apiGroups:
-                - apps
-              resources:
-                - deployments
-              verbs:
-                - create
-                - delete
-                - patch
-                - update
-                - get
-                - list
-                - watch
-            - apiGroups:
-                - ""
-              resources:
-                - pod
-                - service
-                - secret
               verbs:
                 - create
                 - delete
@@ -129,19 +104,13 @@ spec:
                   path: .metadata.labels['release']
             - apiVersion: cert-manager.io/v1
               kind: Certificate
+            - apiVersion: cert-manager.io/v1
+              kind: ClusterIssuer
             - apiVersion: helm.toolkit.fluxcd.io/v2beta1  
               kind: HelmRelease
             - apiVersion: source.toolkit.fluxcd.io/v1beta2  
               kind: HelmRepository
           import:
-            - apiVersion: apps/v1
-              kind: Deployment
-            - apiVersion: v1
-              kind: Pod 
-            - apiVersion: v1
-              kind: Service
-            - apiVersion: v1
-              kind: ServiceAccount
             - apiVersion: v1
               kind: Secret
               
