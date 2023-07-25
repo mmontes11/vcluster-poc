@@ -77,9 +77,6 @@ spec:
           export:
             - apiVersion: gateway.networking.k8s.io/v1beta1
               kind: HTTPRoute 
-              patches:
-                - op: rewriteName
-                  path: .spec.rules[*].backendRefs[*].name
             - apiVersion: monitoring.coreos.com/v1
               kind: ServiceMonitor
               patches:
@@ -90,8 +87,6 @@ spec:
                 - op: copyFromObject
                   fromPath: .metadata.labels['release'] 
                   path: .metadata.labels['release']
-                - op: rewriteName
-                  path: .spec.endpoints[*]
             - apiVersion: cert-manager.io/v1
               kind: Certificate
           import:
