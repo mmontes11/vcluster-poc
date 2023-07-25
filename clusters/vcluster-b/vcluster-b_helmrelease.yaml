@@ -64,6 +64,7 @@ spec:
                 - cert-manager.io
               resources:
                 - certificates
+                - issuers
                 - clusterissuers
               verbs:
                 - create
@@ -90,6 +91,8 @@ spec:
                   path: .metadata.labels['release']
             - apiVersion: cert-manager.io/v1
               kind: Certificate
+            - apiVersion: cert-manager.io/v1
+              kind: Issuer
             - apiVersion: cert-manager.io/v1
               kind: ClusterIssuer
           import:

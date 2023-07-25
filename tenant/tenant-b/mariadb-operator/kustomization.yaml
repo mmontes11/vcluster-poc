@@ -1,6 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: vcluster-b
 resources:
   - mariadb-operator_helmrelease.yaml
   - mariadb-operator_helmrepository.yaml
