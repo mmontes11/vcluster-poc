@@ -72,6 +72,30 @@ spec:
                 - get
                 - list
                 - watch
+            - apiGroups:
+                - helm.toolkit.fluxcd.io   
+              resources:
+                - helmreleases
+              verbs:
+                - create
+                - delete
+                - patch
+                - update
+                - get
+                - list
+                - watch
+            - apiGroups:
+                - source.toolkit.fluxcd.io  
+              resources:
+                - helmrepositories
+              verbs:
+                - create
+                - delete
+                - patch
+                - update
+                - get
+                - list
+                - watch
         config: |-
           version: v1beta1
           export:
@@ -89,6 +113,10 @@ spec:
                   path: .metadata.labels['release']
             - apiVersion: cert-manager.io/v1
               kind: Certificate
+            - apiVersion: helm.toolkit.fluxcd.io/v1beta2  
+              kind: HelmRelease
+            - apiVersion: source.toolkit.fluxcd.io/v1beta2  
+              kind: HelmRepository
           import:
             - kind: Secret
               apiVersion: v1
