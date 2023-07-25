@@ -20,6 +20,8 @@ spec:
       extraArgs:
       - --tls-san=172.18.0.211
       - --out-kube-config-server=https://172.18.0.211
+    multiNamespaceMode:
+      enabled: true
     sync:
       generic:
         clusterRole:
@@ -38,6 +40,30 @@ spec:
                 - gateway.networking.k8s.io  
               resources:
                 - httproutes 
+              verbs:
+                - create
+                - delete
+                - patch
+                - update
+                - get
+                - list
+                - watch
+            - apiGroups:
+                - monitoring.coreos.com
+              resources:
+                - servicemonitors 
+              verbs:
+                - create
+                - delete
+                - patch
+                - update
+                - get
+                - list
+                - watch
+            - apiGroups:
+                - cert-manager.io
+              resources:
+                - certificates
               verbs:
                 - create
                 - delete
@@ -66,5 +92,8 @@ spec:
                   path: .metadata.labels['release']
                 - op: rewriteName
                   path: .spec.endpoints[*]
-                - op: rewriteLabelExpressionsSelector
-                  path: .spec.selector
+            - apiVersion: cert-manager.io/v1
+              kind: Certificate
+          import:
+            - kind: Secret
+              apiVersion: v1
