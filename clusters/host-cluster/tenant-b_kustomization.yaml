@@ -9,10 +9,6 @@ spec:
       namespace: flux-system
     - name: gateway-api
       namespace: flux-system
-  kubeConfig:
-    secretRef:
-      name: vc-vcluster-b
-      key: config
   interval: 5m
   sourceRef:
     kind: GitRepository

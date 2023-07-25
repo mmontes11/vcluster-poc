@@ -3,6 +3,11 @@ kind: HelmRelease
 metadata:
   name: mariadb-operator
 spec:
+  kubeConfig:
+    secretRef:
+      name: vc-vcluster-b
+      key: config
+  targetNamespace: mariadb-operator
   chart:
     spec:
       chart: mariadb-operator
