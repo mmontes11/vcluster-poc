@@ -11,3 +11,32 @@ spec:
         name: prometheus
       version: "42.1.1"
   interval: 5m
+  values:
+    grafana:
+      enabled: true
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+            - name: "default"
+              orgId: 1
+              folder: ""
+              type: file
+              disableDeletion: false
+              editable: true
+              options:
+                path: /var/lib/grafana/dashboards/default
+      dashboards:
+        default:
+          mysql-overview:
+            gnetId: 7362
+            revision: 5
+            datasource: Prometheus
+          mysql-quickstart:
+            gnetId: 14057
+            revision: 1
+            datasource: Prometheus
+          cert-manager:
+            gnetId: 11001
+            revision: 1
+            datasource: Prometheus

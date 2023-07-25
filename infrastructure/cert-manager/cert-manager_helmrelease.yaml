@@ -13,4 +13,11 @@ spec:
   interval: 5m
   values:
     installCRDs: true
+    prometheus:
+      enabled: true
+      servicemonitor:
+        enabled: true
+        prometheusInstance: kube-prometheus-stack
+        labels:
+          release: kube-prometheus-stack
     featureGates: "ExperimentalGatewayAPISupport=true"
