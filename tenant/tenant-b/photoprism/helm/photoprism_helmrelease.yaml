@@ -29,6 +29,24 @@ spec:
       PHOTOPRISM_LOG_LEVEL: debug
     secretRef: null
     persistence:
+      enabled: true
+      volumes:
+        - name: originals
+          persistentVolumeClaim:
+            claimName: photoprism
+        - name: import
+          emptyDir: {}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: photoprism
+      volumeMounts:
+        - name: originals
+          mountPath: /photoprism/originals
+          readOnly: true
+        - name: import
+          mountPath: /photoprism/import
+        - name: storage
+          mountPath: /photoprism/storage
     database:
       driver: mysql
       dsnSecretKeyRef:

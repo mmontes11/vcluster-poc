@@ -4,3 +4,4 @@ resources:
   - mariadb_secret.yaml
   - mariadb.yaml
   - photoprism_httproute.yaml
+  - photoprism_persistentvolumeclaim.yaml
