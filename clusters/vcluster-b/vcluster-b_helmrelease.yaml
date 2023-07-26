@@ -23,6 +23,10 @@ spec:
     multiNamespaceMode:
       enabled: true
     sync:
+      persistentvolumes:
+        enabled: true
+      storageclasses:
+        enabled: true
       generic:
         clusterRole:
           extraRules:
