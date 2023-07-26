@@ -10,6 +10,7 @@ spec:
     secretRef:
       name: vc-vcluster-a
       key: config
+  targetNamespace: default
   interval: 5m
   sourceRef:
     kind: GitRepository

@@ -11,6 +11,7 @@ spec:
     secretRef:
       name: vc-vcluster-b
       key: config
+  targetNamespace: default
   interval: 5m
   sourceRef:
     kind: GitRepository
@@ -27,6 +28,7 @@ metadata:
 spec:
   dependsOn:
     - name: photoprism-manifests
+  targetNamespace: vcluster-b
   interval: 5m
   sourceRef:
     kind: GitRepository
