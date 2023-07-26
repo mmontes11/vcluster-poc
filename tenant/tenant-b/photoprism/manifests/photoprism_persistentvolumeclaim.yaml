@@ -3,6 +3,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: photoprism
 spec:
+  # TODO:
+  # vcluster does not sync PVCs if storageClassname is empty, therefore Kubernetes can't set the default one. Raise a PR upstream. See:
+  # https://github.com/loft-sh/vcluster/blob/main/pkg/controllers/resources/persistentvolumeclaims/translate.go#L55
+  # https://kubernetes.io/docs/concepts/storage/storage-classes/#default-storageclass
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
