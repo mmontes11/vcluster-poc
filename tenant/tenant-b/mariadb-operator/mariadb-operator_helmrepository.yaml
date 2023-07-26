@@ -2,7 +2,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: mariadb-operator
-  namespace: vcluster-b
 spec:
   interval: 5m
   url: https://mariadb-operator.github.io/mariadb-operator

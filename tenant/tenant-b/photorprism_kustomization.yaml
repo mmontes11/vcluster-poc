@@ -1,0 +1,37 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: photoprism-manifests
+spec:
+  dependsOn:
+    - name: mariadb-operator
+    - name: gateway-api
+      namespace: flux-system
+  kubeConfig:
+    secretRef:
+      name: vc-vcluster-b
+      key: config
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./tenant/tenant-b/manifests
+  prune: true
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: photoprism-helm
+spec:
+  dependsOn:
+    - name: photoprism-manifests
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./tenant/tenant-b/helm
+  prune: true
+  timeout: 5m

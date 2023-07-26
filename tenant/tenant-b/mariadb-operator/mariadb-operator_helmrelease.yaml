@@ -7,8 +7,8 @@ spec:
     secretRef:
       name: vc-vcluster-b
       key: config
-  targetNamespace: mariadb-operator
-  storageNamespace: mariadb-operator
+  targetNamespace: default
+  storageNamespace: default
   chart:
     spec:
       chart: mariadb-operator
@@ -17,7 +17,6 @@ spec:
         name: mariadb-operator
       version: "0.18.0"
   install:
-    createNamespace: true
     crds: CreateReplace
   interval: 5m
   values:
