@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: mariadb-operator
 spec:
-  targetNamespace: default
+  targetNamespace: vcluster-b
   interval: 5m
   sourceRef:
     kind: GitRepository
