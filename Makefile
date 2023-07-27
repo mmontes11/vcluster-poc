@@ -43,9 +43,6 @@ vctx: vcluster cluster-ctx ## Configure vcluster contexts.
 	$(VCLUSTER) connect $(VCLUSTER_A) -n $(VCLUSTER_A)
 	$(VCLUSTER) connect $(VCLUSTER_B) -n $(VCLUSTER_B)
 
-# TODO:
-# vcluster disconnect does not delete the vcluster current context, you have to vcluster delete if you want to do so.
-# Support vcluster disconnect --delete-current upstream to have a simetric behaviour between subcommands. 
 .PHONY: vcluster-delete
 vcluster-delete: vcluster cluster-ctx ## Delete vclusters.
 	$(VCLUSTER) delete $(VCLUSTER_A) -n $(VCLUSTER_A)
