@@ -23,6 +23,9 @@ spec:
     multiNamespaceMode:
       enabled: true
     sync:
+      nodes:
+        enabled: true
+        syncAllNodes: true
       generic:
         clusterRole:
           extraRules:

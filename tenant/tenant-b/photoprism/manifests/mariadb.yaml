@@ -22,6 +22,17 @@ spec:
     tag: "11.0.2"
     pullPolicy: IfNotPresent
   port: 3306
+  replicas: 3
+  galera:
+    enabled: true
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - topologyKey: "kubernetes.io/hostname"
+  tolerations:
+    - key: "mariadb.mmontes.io/ha"
+      operator: "Exists"
+      effect: "NoSchedule"
   volumeClaimTemplate:
     resources:
       requests:

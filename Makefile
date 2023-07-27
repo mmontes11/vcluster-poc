@@ -60,11 +60,11 @@ uninstall: vcluster-delete cluster-delete ## Tear down vcluster and cluster.
 ##@ Cluster
 
 CLUSTER ?= host-cluster
-KIND_IMAGE ?= kindest/node:v1.27.3
+KIND_CONFIG ?= hack/config/kind.yaml
 
 .PHONY: cluster
 cluster: kind ## Provision kind cluster.
-	$(KIND) create cluster --name $(CLUSTER) --image $(KIND_IMAGE)
+	$(KIND) create cluster --name $(CLUSTER) --config $(KIND_CONFIG)
 
 .PHONY: cluster-delete
 cluster-delete: kind ## Delete kind cluster.
