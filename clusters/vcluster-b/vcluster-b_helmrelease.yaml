@@ -95,8 +95,7 @@ spec:
                 - op: replace
                   path: .spec.namespaceSelector
                   value:
-                    any: false
-                    matchNames: []
+                    any: true
             - apiVersion: cert-manager.io/v1
               kind: Certificate
             - apiVersion: cert-manager.io/v1
