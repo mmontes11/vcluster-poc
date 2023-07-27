@@ -33,16 +33,16 @@ spec:
       volumes:
         - name: originals
           persistentVolumeClaim:
-            claimName: photoprism
+            claimName: photoprism-originals
         - name: import
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: photoprism-import
         - name: storage
           persistentVolumeClaim:
-            claimName: photoprism
+            claimName: photoprism-storage
       volumeMounts:
         - name: originals
           mountPath: /photoprism/originals
-          readOnly: true
         - name: import
           mountPath: /photoprism/import
         - name: storage
