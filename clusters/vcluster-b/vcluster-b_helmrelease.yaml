@@ -23,6 +23,8 @@ spec:
     multiNamespaceMode:
       enabled: true
     sync:
+      storageclasses:
+        enabled: true
       nodes:
         enabled: true
         syncAllNodes: true
